@@ -1,14 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, ViewChild, NgZone } from '@angular/core';
 declare var window: any;
-
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: 'app-payment',
+  templateUrl: './payment.component.html',
+  styleUrls: ['./payment.component.scss']
 })
-
-export class AppComponent {
+export class PaymentComponent {
   @ViewChild('paytm-checkoutjs') private div_element_id: ElementRef;
 
   CUST_ID = "CUST001";
@@ -45,7 +43,7 @@ export class AppComponent {
     mapForm.submit();
   }
   payWithJs() {
-    alert("yes");
+    alert("Trying With CheckoutJs");
     const formData = new FormData();
     formData.append("MID", this.MID);
     formData.append("CUST_ID", this.CUST_ID);
@@ -78,15 +76,21 @@ export class AppComponent {
       };
       this.zone.runOutsideAngular(()=>{
         if(window.Paytm && window.Paytm.CheckoutJS){
-          window.Paytm.CheckoutJS.onLoad=()=>{
-            console.log("loaded");
-          }
-          console.log(config,"Config");
-          window.Paytm.CheckoutJS.init(config).then(()=>{
+          setTimeout(()=>{
+            // window.Paytm.CheckoutJS.onLoad=()=>{
+            //   console.log("loaded");
+            // }
+            // console.log( window.Paytm.CheckoutJS.onLoad);
+            // console.log(config,"Config");
+            // window.Paytm.CheckoutJS.invoke();
+            window.Paytm.CheckoutJS.init(config).then(()=>{
+
+            }).catch((e)=>{
+              console.log("error => ",e);
+
+            });
             window.Paytm.CheckoutJS.invoke();
-          }).catch((e)=>{
-            console.log("error => ",e);
-          })
+          },500);
       }
       });
     });

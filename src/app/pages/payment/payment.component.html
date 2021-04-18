@@ -1,0 +1,11 @@
+<button (click)="payWithJs()">This one</button>
+<!-- <div id="paytm-checkoutjs" style="border: 3px solid #2e2e2e;"></div> -->
+
+<h1>Please do not refresh this page...</h1>
+<input type="text" [(ngModel)]="MID">
+<input type="text" [(ngModel)]="ORDER_ID">
+<input type="text" [(ngModel)]="CUST_ID" >
+<input type="text" [(ngModel)]="TXN_AMOUNT">
+
+<input type="button" value="Pay Now" (click)="payNow()" />
+<div  id="paytm-checkoutjs">Change content Here</div>
